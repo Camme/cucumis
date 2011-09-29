@@ -42,11 +42,13 @@ function processCmdLine() {
 		+ '                           json        : Prints the feature as JSON\n'
         + '  -b, --boring           Suppress ansi-escape colors\n'
 		+ '  -t, --timeout MS       Async step timeout in milliseconds, defaults to 5000\n'
+		+ '  -e, --extra arg       Extra arg to use\n'
 	);
 
 	// Parse arguments
 	var args = process.argv.slice(2)
-	           , path = null;
+	           , path = null
+			   , extraArgs = null;
 
 	while (args.length) {
 		var arg = args.shift();
@@ -69,6 +71,12 @@ function processCmdLine() {
 			case '-f':
 			case '--format':
 				format = args.shift();
+				break;
+				
+			case '-e':
+			case '--extra':
+				extraArgs = args.shift();
+				cucumis.extraArgs = extraArgs;
 				break;
 
 			default:
